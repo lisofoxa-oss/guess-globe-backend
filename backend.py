@@ -25,7 +25,7 @@ EASY_COUNTRIES = [
     {"id": 6, "name": "Китай", "flag": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg"},
     {"id": 7, "name": "Бразилия", "flag": "https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg"},
     {"id": 8, "name": "Канада", "flag": "https://upload.wikimedia.org/wikipedia/en/c/cf/Flag_of_Canada.svg"},
-    {"id": 9, "name": "Австралия", "flag": "https://upload.wikimedia.org/wikipedia/en/8/88/Flag_of_Australia.svg"},
+    {"id": 9, "name": "Австралия", "flag": "https://upload.wikimedia.org/wikipedia/commons/8/88/Flag_of_Australia_%28converted%29.svg"},
     {"id": 10, "name": "Индия", "flag": "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg"},
     {"id": 11, "name": "Италия", "flag": "https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg"},
     {"id": 12, "name": "Испания", "flag": "https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg"},
