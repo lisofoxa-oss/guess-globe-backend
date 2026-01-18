@@ -263,7 +263,6 @@ def get_questions(authorization: str = Header(...), level: str = "easy", count: 
     user_id = parse_telegram_data(authorization)
     pool = get_countries_by_difficulty(level)
     
-    # Выбираем уникальные страны
     if len(pool) < count:
         selected = pool
     else:
@@ -272,7 +271,16 @@ def get_questions(authorization: str = Header(...), level: str = "easy", count: 
     questions = []
     for country in selected:
         others = [c for c in pool if c["name"] != country["name"]]
-        options = [country["name"]] + [c["name"] for c in random.sample(others, 3)]
+        
+        # Разное количество вариантов по уровню
+        if level == "easy":
+            num_options = 4
+        elif level == "medium":
+            num_options = 5
+        else:  # hard
+            num_options = 6
+            
+        options = [country["name"]] + [c["name"] for c in random.sample(others, num_options - 1)]
         random.shuffle(options)
         questions.append({
             "image_url": country["flag"],
