@@ -299,7 +299,11 @@ def get_questions(
             })
     
     return questions
-
+    
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+    
 @app.post("/api/answer")
 def check_answer(data: dict):
     submitted = data.get("answer")
