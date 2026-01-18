@@ -259,7 +259,12 @@ def parse_telegram_data(init_data):
         raise HTTPException(status_code=400, detail="Invalid init data")
 
 @app.get("/api/questions")
-def get_questions(authorization: str = Header(...), level: str = "easy", count: int = 10):
+def get_questions(
+    authorization: str = Header(...),
+    level: str = "easy",
+    mode: str = "flag-to-country",  # НОВОЕ
+    count: int = 10
+):
     user_id = parse_telegram_data(authorization)
     pool = get_countries_by_difficulty(level)
     
@@ -270,23 +275,28 @@ def get_questions(authorization: str = Header(...), level: str = "easy", count: 
     
     questions = []
     for country in selected:
-        others = [c for c in pool if c["name"] != country["name"]]
-        
-        # Разное количество вариантов по уровню
-        if level == "easy":
-            num_options = 4
-        elif level == "medium":
-            num_options = 5
-        else:  # hard
-            num_options = 6
-            
-        options = [country["name"]] + [c["name"] for c in random.sample(others, num_options - 1)]
-        random.shuffle(options)
-        questions.append({
-            "image_url": country["flag"],
-            "options": options,
-            "correct_answer": country["name"]
-        })
+        if mode == "country-to-flag":
+            # Режим: Страна → Флаг
+            others = [c for c in pool if c["name"] != country["name"]]
+            num_options = 4 if level == "easy" else (5 if level == "medium" else 6)
+            options = [country] + random.sample(others, num_options - 1)
+            random.shuffle(options)
+            questions.append({
+                "text": country["name"],  # Название страны
+                "options": [{"image_url": opt["flag"]} for opt in options],
+                "correct_answer": country["flag"]
+            })
+        else:
+            # Старый режим: Флаг → Страна
+            others = [c for c in pool if c["name"] != country["name"]]
+            num_options = 4 if level == "easy" else (5 if level == "medium" else 6)
+            options = [country["name"]] + [c["name"] for c in random.sample(others, num_options - 1)]
+            random.shuffle(options)
+            questions.append({
+                "image_url": country["flag"],
+                "options": options,
+                "correct_answer": country["name"]
+            })
     
     return questions
 
