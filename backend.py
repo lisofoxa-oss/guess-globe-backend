@@ -270,8 +270,7 @@ def get_question(authorization: str = Header(...), level: str = "easy"):
         "question_id": country["id"],
         "image_url": country["flag"],
         "options": options,
-        "correct_answer": country["name"],
-        "level": level
+        "correct_answer": country["name"]
     }
 
 @app.post("/api/answer")
