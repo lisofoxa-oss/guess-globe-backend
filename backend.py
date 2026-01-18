@@ -258,20 +258,29 @@ def parse_telegram_data(init_data):
     except Exception as e:
         raise HTTPException(status_code=400, detail="Invalid init data")
 
-@app.get("/api/question")
-def get_question(authorization: str = Header(...), level: str = "easy"):
+@app.get("/api/questions")
+def get_questions(authorization: str = Header(...), level: str = "easy", count: int = 10):
     user_id = parse_telegram_data(authorization)
     pool = get_countries_by_difficulty(level)
-    country = random.choice(pool)
-    others = [c for c in pool if c["name"] != country["name"]]
-    options = [country["name"]] + [c["name"] for c in random.sample(others, 3)]
-    random.shuffle(options)
-    return {
-        "question_id": country["id"],
-        "image_url": country["flag"],
-        "options": options,
-        "correct_answer": country["name"]
-    }
+    
+    # Выбираем уникальные страны
+    if len(pool) < count:
+        selected = pool
+    else:
+        selected = random.sample(pool, count)
+    
+    questions = []
+    for country in selected:
+        others = [c for c in pool if c["name"] != country["name"]]
+        options = [country["name"]] + [c["name"] for c in random.sample(others, 3)]
+        random.shuffle(options)
+        questions.append({
+            "image_url": country["flag"],
+            "options": options,
+            "correct_answer": country["name"]
+        })
+    
+    return questions
 
 @app.post("/api/answer")
 def check_answer(data: dict):
