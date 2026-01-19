@@ -50,6 +50,7 @@ EASY_COUNTRIES = [
 ]
 
 MEDIUM_COUNTRIES = [
+    {"id": 311, "name": "Беларусь", "flag": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/by.svg"},
     {"id": 31, "name": "Чили", "flag": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cl.svg"},
     {"id": 32, "name": "Таиланд", "flag": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/th.svg"},
     {"id": 33, "name": "Финляндия", "flag": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/fi.svg"},
@@ -121,6 +122,7 @@ MEDIUM_COUNTRIES = [
     {"id": 99, "name": "Судан", "flag": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/sd.svg"},
     {"id": 100, "name": "Ливия", "flag": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/ly.svg"},
 ]
+
 
 HARD_COUNTRIES = [
     {"id": 101, "name": "Бутан", "flag": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/bt.svg"},
